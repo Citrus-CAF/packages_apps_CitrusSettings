@@ -83,7 +83,7 @@ public class CitrusSettings extends SettingsPreferenceFragment {
             super(fm);
 	    frags[0] = new StatusBarSettings();
         frags[1] = new NavigationSettings();
-        frags[3] = new BatterySettings();
+        frags[2] = new BatterySettings();
           
         }
 
