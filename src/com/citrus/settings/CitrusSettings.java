@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.citrus.settings.tabs.BatterySettings;
 import com.citrus.settings.tabs.StatusBarSettings;
 import com.citrus.settings.tabs.NavigationSettings;
 import com.citrus.settings.PagerSlidingTabStrip;
@@ -81,6 +82,8 @@ public class CitrusSettings extends SettingsPreferenceFragment {
         public StatusBarAdapter(FragmentManager fm) {
             super(fm);
 	    frags[0] = new StatusBarSettings();
+        frags[1] = new NavigationSettings();
+        frags[3] = new BatterySettings();
           
         }
 
@@ -103,14 +106,9 @@ public class CitrusSettings extends SettingsPreferenceFragment {
     private String[] getTitles() {
         String titleString[];
         titleString = new String[]{
-		    getString(R.string.status_bar_title)};
-        return titleString;
-    }
-   
-    private String[] getTitles() {
-        String titleString[];
-        titleString = new String[]{
-            getString(R.string.navigation_title)};
+		    getString(R.string.status_bar_title),
+            getString(R.string.navigation_title),
+            getString(R.string.battery_title)};
         return titleString;
     }
 
