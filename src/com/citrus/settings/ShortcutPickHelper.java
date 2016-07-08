@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.custom;
+package com.citrus.settings;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.custom.ShortcutPickHelper.AppExpandableAdapter.GroupInfo;
+import com.citrus.settings.ShortcutPickHelper.AppExpandableAdapter.GroupInfo;
 
 public class ShortcutPickHelper {
 

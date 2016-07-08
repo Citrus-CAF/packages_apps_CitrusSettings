@@ -25,8 +25,8 @@ import com.android.internal.utils.du.ActionConstants;
 import com.android.internal.utils.du.ActionHandler;
 import com.android.internal.utils.du.Config.ButtonConfig;
 import com.android.settings.R;
-import com.android.settings.custom.IconPickHelper;
-import com.android.settings.preference.ActionPreference;
+import com.citrus.settings.IconPickHelper;
+import com.citrus.settings.preference.ActionPreference;
 
 import android.app.ActionBar;
 import android.content.Context;

@@ -37,12 +37,12 @@
         <PreferenceScreen
             android:key="smartbar_settings"
             android:title="@string/smartbar_settings_title"
-            android:fragment="com.android.settings.custom.nav.SmartbarSettings" />
+            android:fragment="com.citrus.settings.SmartbarSettings" />
 
         <PreferenceScreen
             android:key="fling_settings"
             android:title="@string/fling_settings"
-            android:fragment="com.android.settings.custom.nav.FlingSettings" />
+            android:fragment="com.citrus.settings.FlingSettings" />
 
     </PreferenceCategory>
 
@@ -53,9 +53,9 @@
         <PreferenceScreen
             android:key="pulse_settings"
             android:title="@string/pulse_settings"
-            android:fragment="com.android.settings.custom.nav.PulseSettings" />
+            android:fragment="com.citrus.settings.PulseSettings" />
 
-        <com.android.settings.preference.NavbarSizePreference
+        <com.citrus.settings.preference.NavbarSizePreference
             android:key="navigation_bar_size"
             android:title="@string/navigation_bar_size_title" />
 
