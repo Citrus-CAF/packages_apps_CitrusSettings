@@ -351,9 +351,12 @@
     <string name="systemui_tuner_qs_title">Quick settings</string>
     <string name="systemui_tuner_qs_summary">Modify your tiles</string>
     
-        <!-- Hardware keys -->
+    <!-- Hardware keys -->
     <string name="button_keys_title">Hardware Buttons</string>
     <string name="keys_bindings_title">Key actions</string>
+    <string name="hardware_keys_disable_title">Disable Hardware Keys</string>
+    <string name="hardware_keys_disable_summery_on">Hardware Keys are Enabled</string>
+    <string name="hardware_keys_disable_summery_off">Hardware Keys are Disabled</string>
     <string name="keys_enable_custom_title">Enable custom actions</string>
     <string name="keys_enable_custom_summary">Enable custom hardware key actions</string>
     <string name="keys_back_press_title">Back key</string>

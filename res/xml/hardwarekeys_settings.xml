@@ -18,8 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <PreferenceCategory
-                android:key="keys_hwkeys"
-                android:title="@string/keys_hwkeys_title" >
+                android:key="hardware_keys"
+                android:title="@string/button_keys_title" >
 
         <com.citrus.settings.fragments.ButtonBacklightBrightness
                 android:key="button_backlight"
@@ -27,6 +27,11 @@
                 android:dialogTitle="@string/button_backlight_title"
                 android:persistent="false" />
 
+        <SwitchPreference
+            android:key="hardware_keys_disable"
+            android:title="@string/hardware_keys_disable_title"
+            android:summaryOn="@string/hardware_keys_disable_summery_off"
+            android:summaryOff="@string/hardware_keys_disable_summery_on" />
         </PreferenceCategory>
 
         <PreferenceCategory

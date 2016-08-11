@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.SwitchPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -39,6 +40,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.utils.du.DUActionUtils; 
 import com.android.internal.util.slim.AppHelper;
 import com.android.internal.util.slim.ActionConstants;
 import com.android.internal.util.slim.DeviceUtils;
@@ -54,12 +56,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class HardwareKeysSettings extends SettingsPreferenceFragment implements
+public class HardwareKeysSettings extends ActionFragment  implements
         OnPreferenceChangeListener, OnPreferenceClickListener,
         ShortcutPickerHelper.OnPickListener {
 
     private static final String TAG = "HardwareKeys";
 
+    private static final String HWKEY_DISABLE = "hardware_keys_disable"; 
+    private static final String CATEGORY_HWKEY = "hardware_keys"; 
     private static final String KEY_BUTTON_BACKLIGHT = "button_backlight"; 
     private static final String CATEGORY_KEYS = "button_keys";
     private static final String CATEGORY_BACK = "button_keys_back";
@@ -124,6 +128,7 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
     private Preference mAppSwitchPressAction;
     private Preference mAppSwitchLongPressAction;
     private Preference mAppSwitchDoubleTapAction;
+    private SwitchPreference mHwKeyDisable; 
 
     private boolean mCheckPreferences;
     private Map<String, String> mKeySettings = new HashMap<String, String>();
@@ -164,6 +169,24 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.hardwarekeys_settings);
         prefs = getPreferenceScreen();
+
+        final boolean needsNavbar = DUActionUtils.hasNavbarByDefault(getActivity());
+        final PreferenceCategory hwkeyCat = (PreferenceCategory) prefs
+                .findPreference(CATEGORY_HWKEY);
+        int keysDisabled = 0;
+        if (!needsNavbar) {
+            mHwKeyDisable = (SwitchPreference) findPreference(HWKEY_DISABLE);
+            mHwKeyDisable.setOnPreferenceChangeListener(this);
+            keysDisabled = Settings.Secure.getIntForUser(getContentResolver(),
+                    Settings.Secure.HARDWARE_KEYS_DISABLE, 0,
+                    UserHandle.USER_CURRENT);
+            mHwKeyDisable.setChecked(keysDisabled != 0);
+        } else {
+            prefs.removePreference(hwkeyCat);
+        }
+
+        // load preferences first
+        setActionPreferencesEnabled(keysDisabled == 0);
 
         int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
@@ -370,7 +393,7 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
         mCheckPreferences = true;
         return prefs;
     }
-    
+
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.APPLICATION;
@@ -483,6 +506,12 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) newValue;
             Settings.System.putInt(getContentResolver(), Settings.System.HARDWARE_KEY_REBINDING,
                     value ? 1 : 0);
+            return true;
+        } else if (preference == mHwKeyDisable) {
+            boolean value = (Boolean) newValue;
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.HARDWARE_KEYS_DISABLE,
+                    value ? 1 : 0);
+            setActionPreferencesEnabled(!value);
             return true;
         }
         return false;
