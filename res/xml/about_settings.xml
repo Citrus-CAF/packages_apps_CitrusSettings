@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  Copyright (C) 2016 Citrus-AOSP Project
+<!--  Copyright (C) 2016 Citrus-CAF Project
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -17,4 +17,21 @@
     android:title="@string/about_title"
     android:layout="@layout/tab"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+<Preference
+xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="About">
+
+<PreferenceCategory
+              android:key="about"
+              android:title="@string/citrus_info" >
+ 
+        <PreferenceScreen
+    android:summary="@string/citrus_summary" >
+            <intent
+               android:action="android.intent.action.VIEW"
+               android:data="https://plus.google.com/wm/2/se/1/communities/110928715574226998482" />
+      </PreferenceScreen>
+
+     </PreferenceCategory>
 </PreferenceScreen>

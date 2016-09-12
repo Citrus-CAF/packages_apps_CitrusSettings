@@ -113,7 +113,7 @@ public class CitrusSettings extends SettingsPreferenceFragment {
             getString(R.string.ui_title),
 		    getString(R.string.status_bar_title),
             getString(R.string.navigation_title),
-            getString(R.string.recents_title)};
+            getString(R.string.recents_title),
             getString(R.string.about_title)};
 
         return titleString;
