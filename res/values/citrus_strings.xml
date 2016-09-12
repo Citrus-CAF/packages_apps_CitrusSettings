@@ -24,6 +24,7 @@
     <string name="status_bar_title">Status bar</string>
     <string name="ui_title">UI</string>
     <string name="recents_title">Recents</string>
+	<string name="recents_title">About</string>
 
     <!-- Expanded desktop -->
     <string name="expanded_desktop_category">Expanded desktop</string>
@@ -415,4 +416,9 @@
 <string name="hardware_keys_single_tap_title">Single tap action</string>
 <string name="hardware_keys_long_press_title">Long press action</string>
 <string name="hardware_keys_double_tap_title">Double tap action</string>
+
+    <!-- Citrus info -->
+    <string name="citrus_about_info">About Project</string> 
+    <string name="citrus_about_info_summary">Citrus is a Custom ROM from #TeamCardinal, initially based on CM, later we moved on and rebased it with CAF for better experience with Full CMTE Support, Built with UBER toolchain to optimize battery life and with some of the most popular features/customizations you'd ever wish, the main aim of this ROM is to deliver more custimizations, smoothness and light speed performance. We hope that you\'ll love this project, just like Cardinal, and help us in shaping it even better in the future.</string>
+    <string name="citrus_info">About</string>
 </resources>
