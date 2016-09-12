@@ -24,6 +24,7 @@
     <string name="status_bar_title">Status bar</string>
     <string name="ui_title">UI</string>
     <string name="recents_title">Recents</string>
+    <string name="about_title">About</string>
 
     <!-- Expanded desktop -->
     <string name="expanded_desktop_category">Expanded desktop</string>
