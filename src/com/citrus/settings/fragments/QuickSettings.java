@@ -33,6 +33,7 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 
 import java.util.Arrays;
@@ -46,8 +47,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 
     private static final String PREF_THEMES_TILE = "themes_tile_components";
 
+    private static final String PREF_BLOCK_ON_SECURE_KEYGUARD = "block_on_secure_keyguard";
+
     private ListPreference mNumColumns;
     private MultiSelectListPreferenceFix mThemesTile;
+    private SwitchPreference mBlockOnSecureKeyguard;
+
+    private static final int MY_USER_ID = UserHandle.myUserId();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,18 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 
         addPreferencesFromResource(R.xml.quick_settings);
         final ContentResolver resolver = getActivity().getContentResolver();
+        final LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mBlockOnSecureKeyguard = (SwitchPreference) findPreference(PREF_BLOCK_ON_SECURE_KEYGUARD);
+        if (lockPatternUtils.isSecure(MY_USER_ID)) {
+           mBlockOnSecureKeyguard.setChecked(Settings.Secure.getInt(getContentResolver(),
+                  Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 1) == 1);
+           mBlockOnSecureKeyguard.setOnPreferenceChangeListener(this);
+        } else if (mBlockOnSecureKeyguard != null) {
+           prefSet.removePreference(mBlockOnSecureKeyguard);
+        }
 
         mNumColumns = (ListPreference) findPreference("sysui_qs_num_columns");
         int numColumns = Settings.System.getIntForUser(getContentResolver(),
@@ -65,7 +81,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         mNumColumns.setValue(String.valueOf(numColumns));
         updateNumColumnsSummary(numColumns);
         mNumColumns.setOnPreferenceChangeListener(this);
-        
+
         mThemesTile = (MultiSelectListPreferenceFix) findPreference(PREF_THEMES_TILE);
         mThemesTile.setValues(getThemesTileValues());
         mThemesTile.setOnPreferenceChangeListener(this);
@@ -98,6 +114,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
             Set<String> vals = (Set<String>) objValue;
 //            Log.e(TAG, "mThemesTileChanged " + vals.toString());
             setThemesTileValues(vals);
+            return true;
+        } else if (preference == mBlockOnSecureKeyguard) {
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD,
+                    (Boolean) objValue ? 1 : 0);
             return true;
         }
         return false;

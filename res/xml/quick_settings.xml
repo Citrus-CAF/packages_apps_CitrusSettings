@@ -15,7 +15,7 @@
 -->
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/qs_title" 
+        android:title="@string/qs_title"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
@@ -28,19 +28,25 @@
         android:targetClass="com.android.systemui.tuner.QsActivity" />
     </PreferenceScreen>
 
+    <SwitchPreference
+        android:key="block_on_secure_keyguard"
+        android:title="@string/block_on_secure_keyguard_title"
+        android:summary="@string/block_on_secure_keyguard_summary"
+        android:persistent="false" />
+
     <ListPreference
         android:key="sysui_qs_num_columns"
         android:title="@string/qs_num_columns_title"
         android:entries="@array/qs_num_columns_entries"
         android:entryValues="@array/qs_num_columns_values"
         android:persistent="false" />
-        
+
     <com.citrus.settings.preference.SystemSettingSwitchPreference
         android:key="quick_settings_vibrate"
         android:title="@string/quick_settings_vibrate_title"
         android:summary="@string/quick_settings_vibrate_summary"
         android:defaultValue="false"/>
-    
+
     <com.citrus.settings.preference.SystemSettingSwitchPreference
         android:key="sysui_qs_main_tiles"
         android:title="@string/qs_main_tiles_title"
@@ -68,6 +74,5 @@
         android:persistent="false" />
 
     </PreferenceCategory>
-    
-</PreferenceScreen>
 
+</PreferenceScreen>
